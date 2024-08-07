@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getProblemDetails } from '../redux/actions/problemActions';
-import { listSolutions, createSolution } from '../redux/actions/solutionActions';
-import { Container, Card, CardContent, Typography, TextField, Button, Box, Alert } from '@mui/material';
+import { listSolutions, createSolution, voteSolution } from '../redux/actions/solutionActions';
+import { Container, Card, CardContent, Typography, TextField, Button, Box, Alert, IconButton } from '@mui/material';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 const ProblemPage = () => {
-  const { id } = useParams(); // Use useParams to get the problem ID
+  const { id } = useParams();
   const [solutionText, setSolutionText] = useState('');
   const [error, setError] = useState(null);
 
@@ -34,6 +36,10 @@ const ProblemPage = () => {
     }
     dispatch(createSolution(id, { text: solutionText }));
     setSolutionText('');
+  };
+
+  const voteHandler = (solutionId, vote) => {
+    dispatch(voteSolution(solutionId, vote));
   };
 
   return (
@@ -78,11 +84,19 @@ const ProblemPage = () => {
                 <CardContent>
                   <Typography variant="body1">{sol.text}</Typography>
                   <Typography variant="caption" display="block" gutterBottom>
-                    Submitted by: {sol.user.name}
+                    Submitted by: {sol.user ? sol.user.name : 'Anonymous'}
                   </Typography>
                   <Typography variant="caption" display="block" gutterBottom>
                     Votes: {sol.votes}
                   </Typography>
+                  <Box>
+                    <IconButton onClick={() => voteHandler(sol._id, 1)}>
+                      <ThumbUpIcon />
+                    </IconButton>
+                    <IconButton onClick={() => voteHandler(sol._id, -1)}>
+                      <ThumbDownIcon />
+                    </IconButton>
+                  </Box>
                 </CardContent>
               </Card>
             ))}

@@ -7,7 +7,7 @@ const Problem = require('../models/problemModel'); // Assuming solutions are par
 // @route   GET /api/solutions/:problemId
 // @access  Public
 const listSolutions = asyncHandler(async (req, res) => {
-  const solutions = await Solution.find({ problem: req.params.problemId });
+  const solutions = await Solution.find({ problem: req.params.problemId }).populate('user', 'name');
   res.json(solutions);
 });
 

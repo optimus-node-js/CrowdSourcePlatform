@@ -60,7 +60,7 @@ export const createSolution = (problemId, solution) => async (
   }
 };
 
-export const voteSolution = (id, vote) => async (dispatch, getState) => {
+export const voteSolution = (solutionId, vote) => async (dispatch, getState) => {
   try {
     const {
       userLogin: { userInfo },
@@ -73,7 +73,10 @@ export const voteSolution = (id, vote) => async (dispatch, getState) => {
       },
     };
 
-    await axios.put(`/api/solutions/${id}/vote`, { vote }, config);
+    await axios.put(`/api/solutions/${solutionId}/vote`, { vote }, config);
+
+    // Re-fetch the solutions to update the list
+    dispatch(listSolutions(getState().problemDetails.problem._id));
   } catch (error) {
     console.error(error);
   }
