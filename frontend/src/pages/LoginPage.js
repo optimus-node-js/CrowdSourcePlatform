@@ -3,21 +3,23 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/actions/userActions';
 import { Container, TextField, Button, Typography, Box, Alert } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-const LoginPage = ({ history }) => {
+const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
 
   useEffect(() => {
     if (userInfo) {
-      history.push('/');
+      navigate('/'); // Use navigate instead of history.push
     }
-  }, [history, userInfo]);
+  }, [navigate, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
