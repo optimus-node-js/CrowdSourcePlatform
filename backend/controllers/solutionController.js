@@ -1,55 +1,58 @@
 // backend/controllers/solutionController.js
-const Solution = require('../models/Solution');
-const Problem = require('../models/Problem');
+const asyncHandler = require('express-async-handler');
+const Solution = require('../models/solutionModel'); // Assuming a separate Solution model
+const Problem = require('../models/problemModel'); // Assuming solutions are part of Problem model
 
-const createSolution = async (req, res) => {
-  const { content } = req.body;
-  const { problemId } = req.params;
-
-  const problem = await Problem.findById(problemId);
-
-  if (!problem) {
-    return res.status(404).json({ message: 'Problem not found' });
-  }
-
-  const solution = await Solution.create({
-    content,
-    problem: problemId,
-    user: req.user._id,
-  });
-
-  problem.solutions.push(solution._id);
-  await problem.save();
-
-  res.status(201).json(solution);
-};
-
-const getSolutionsForProblem = async (req, res) => {
-  const solutions = await Solution.find({ problem: req.params.problemId }).populate(
-    'user',
-    'name'
-  );
-
+// @desc    List solutions for a problem
+// @route   GET /api/solutions/:problemId
+// @access  Public
+const listSolutions = asyncHandler(async (req, res) => {
+  const solutions = await Solution.find({ problem: req.params.problemId });
   res.json(solutions);
-};
+});
 
-const voteSolution = async (req, res) => {
-  const { id } = req.params;
-  const { vote } = req.body; // vote can be +1 or -1
+// @desc    Create a solution for a problem
+// @route   POST /api/solutions/:problemId
+// @access  Private
+const createSolution = asyncHandler(async (req, res) => {
+  const { text } = req.body;
 
-  const solution = await Solution.findById(id);
+  const problem = await Problem.findById(req.params.problemId);
+
+  if (problem) {
+    const solution = new Solution({
+      text,
+      user: req.user._id,
+      problem: req.params.problemId,
+    });
+
+    const createdSolution = await solution.save();
+    res.status(201).json(createdSolution);
+  } else {
+    res.status(404);
+    throw new Error('Problem not found');
+  }
+});
+
+// @desc    Vote on a solution
+// @route   PUT /api/solutions/:id/vote
+// @access  Private
+const voteSolution = asyncHandler(async (req, res) => {
+  const { vote } = req.body;
+  const solution = await Solution.findById(req.params.id);
 
   if (solution) {
     solution.votes += vote;
-    await solution.save();
-    res.json(solution);
+    const updatedSolution = await solution.save();
+    res.json(updatedSolution);
   } else {
-    res.status(404).json({ message: 'Solution not found' });
+    res.status(404);
+    throw new Error('Solution not found');
   }
-};
+});
 
 module.exports = {
+  listSolutions,
   createSolution,
-  getSolutionsForProblem,
   voteSolution,
 };

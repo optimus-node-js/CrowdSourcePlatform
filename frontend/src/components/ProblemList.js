@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProblems } from '../redux/actions/problemActions';
 import { Link } from 'react-router-dom';
-import { Container, Typography, Grid, Card, CardContent, CardActions, Button, CircularProgress, Alert } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, CardActions, Button, CircularProgress, Alert, Box } from '@mui/material';
 
 const ProblemList = () => {
   const dispatch = useDispatch();
@@ -11,6 +11,9 @@ const ProblemList = () => {
 
   const problemList = useSelector((state) => state.problemList);
   const { loading, problems } = problemList;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
     const getProblems = async () => {
@@ -26,9 +29,16 @@ const ProblemList = () => {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        Problems
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography variant="h4" gutterBottom>
+          Problems
+        </Typography>
+        {userInfo && (
+          <Button variant="contained" color="primary" component={Link} to="/add-problem">
+            Add Problem
+          </Button>
+        )}
+      </Box>
       {loading && <CircularProgress />}
       {error && <Alert severity="error">{error}</Alert>}
       <Grid container spacing={4}>

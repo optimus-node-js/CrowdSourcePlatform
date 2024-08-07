@@ -1,5 +1,7 @@
 // backend/controllers/problemController.js
-const Problem = require('../models/Problem');
+const Problem = require('../models/problemModel');
+const asyncHandler = require('express-async-handler');
+const Solution = require('../models/solutionModel');
 
 const createProblem = async (req, res) => {
   const { title, description, tags } = req.body;
@@ -58,10 +60,33 @@ const deleteProblem = async (req, res) => {
   }
 };
 
+const addSolution = asyncHandler(async (req, res) => {
+  const { text } = req.body;
+
+  const problem = await Problem.findById(req.params.id);
+
+  if (problem) {
+    const solution = new Solution({
+      text,
+      user: req.user._id,
+      problem: req.params.id,
+    });
+
+    const createdSolution = await solution.save();
+    res.status(201).json(createdSolution);
+  } else {
+    res.status(404);
+    throw new Error('Problem not found');
+  }
+});
+
+
+
 module.exports = {
   createProblem,
   getProblems,
   getProblemById,
   updateProblem,
   deleteProblem,
+  addSolution
 };

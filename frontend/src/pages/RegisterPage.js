@@ -2,13 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../redux/actions/userActions';
-import { Container, TextField, Button, Typography, Box, Alert } from '@mui/material';
+import { Container, TextField, Button, Typography, Box, Alert, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [dob, setDob] = useState('');
+  const [gender, setGender] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,13 +21,13 @@ const RegisterPage = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate('/'); // Use navigate instead of history.push
+      navigate('/');
     }
   }, [navigate, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+    dispatch(register({ firstName, lastName, email, password, dob, gender }));
   };
 
   return (
@@ -39,13 +42,25 @@ const RegisterPage = () => {
           margin="normal"
           required
           fullWidth
-          id="name"
-          label="Name"
-          name="name"
-          autoComplete="name"
+          id="firstName"
+          label="First Name"
+          name="firstName"
+          autoComplete="given-name"
           autoFocus
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="lastName"
+          label="Last Name"
+          name="lastName"
+          autoComplete="family-name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
         />
         <TextField
           variant="outlined"
@@ -68,10 +83,39 @@ const RegisterPage = () => {
           label="Password"
           type="password"
           id="password"
-          autoComplete="current-password"
+          autoComplete="new-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="dob"
+          label="Date of Birth"
+          type="date"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          value={dob}
+          onChange={(e) => setDob(e.target.value)}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="gender"
+          select
+          label="Gender"
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
+        >
+          <MenuItem value="male">Male</MenuItem>
+          <MenuItem value="female">Female</MenuItem>
+          <MenuItem value="other">Other</MenuItem>
+        </TextField>
         <Button type="submit" fullWidth variant="contained" color="primary" disabled={loading}>
           {loading ? 'Loading...' : 'Register'}
         </Button>
