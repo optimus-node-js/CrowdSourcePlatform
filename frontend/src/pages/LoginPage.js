@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/actions/userActions';
+import { Container, TextField, Button, Typography, Box, Alert } from '@mui/material';
 
 const LoginPage = ({ history }) => {
   const [email, setEmail] = useState('');
@@ -24,37 +25,43 @@ const LoginPage = ({ history }) => {
   };
 
   return (
-    <div className="container mx-auto mt-5">
-      <h1 className="text-2xl font-bold mb-4">Login</h1>
-      <form onSubmit={submitHandler}>
-        <div className="mb-4">
-          <label className="block mb-2">Email Address</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 border rounded"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 border rounded"
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-          disabled={loading}
-        >
+    <Container maxWidth="xs">
+      <Box component="form" onSubmit={submitHandler} sx={{ mt: 3 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Login
+        </Typography>
+        {error && <Alert severity="error">{error}</Alert>}
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          autoFocus
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button type="submit" fullWidth variant="contained" color="primary" disabled={loading}>
           {loading ? 'Loading...' : 'Login'}
-        </button>
-      </form>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-    </div>
+        </Button>
+      </Box>
+    </Container>
   );
 };
 

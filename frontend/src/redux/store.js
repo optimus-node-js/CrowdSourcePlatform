@@ -1,6 +1,6 @@
 // frontend/src/redux/store.js
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { thunk } from 'redux-thunk'; // Import as a named export
+import thunk from 'redux-thunk'; // Import as a named export
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   userLoginReducer,
