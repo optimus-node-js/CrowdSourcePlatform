@@ -13,7 +13,7 @@ export const listSolutions = (problemId) => async (dispatch) => {
   try {
     dispatch({ type: SOLUTION_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/solutions/${problemId}`);
+    const { data } = await axios.get(`/api/solutions/${problemId}/solutions`);
 
     dispatch({ type: SOLUTION_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -44,7 +44,7 @@ export const createSolution = (problemId, solution) => async (
       },
     };
 
-    await axios.post(`/api/solutions/${problemId}`, solution, config);
+    await axios.post(`/api/solutions/${problemId}/solutions`, solution, config);
 
     dispatch({ type: SOLUTION_CREATE_SUCCESS });
 

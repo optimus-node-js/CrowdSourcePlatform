@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Solution = require('../models/solutionModel');
+const Problem = require('../models/problemModel');
 
 const getSolutions = asyncHandler(async (req, res) => {
     const solutions = await Solution.find({ problem: req.params.problemId }).populate('user', 'firstName lastName');
@@ -7,12 +8,15 @@ const getSolutions = asyncHandler(async (req, res) => {
 });
 
 const createSolution = asyncHandler(async (req, res) => {
-    const { text, problemId } = req.body;
+    const { text } = req.body;
+    const problemId = req.params.problemId;
+
     const solution = await Solution.create({
         text,
         user: req.user._id,
         problem: problemId
     });
+
     res.status(201).json(solution);
 });
 
