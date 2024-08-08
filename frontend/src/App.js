@@ -7,6 +7,7 @@ import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import ProblemPage from './pages/ProblemPage';
 import AddProblemPage from './pages/AddProblemPage';
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
   return (
@@ -17,9 +18,15 @@ const App = () => {
           <Route path="/" element={<HomePage />} exact />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/problems/:id" element={<ProblemPage />} />
-          <Route path="/add-problem" element={<AddProblemPage />} />
+          <Route path="/profile" element={<PrivateRoute />}>
+            <Route path="/profile" element={<ProfilePage />} />
+          </Route>
+          <Route path="/problems/:id" element={<PrivateRoute />}>
+            <Route path="/problems/:id" element={<ProblemPage />} />
+          </Route>
+          <Route path="/add-problem" element={<PrivateRoute />}>
+            <Route path="/add-problem" element={<AddProblemPage />} />
+          </Route>
         </Routes>
       </main>
     </Router>
