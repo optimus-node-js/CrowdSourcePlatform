@@ -138,5 +138,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Project Maintainer**: Your Name
 
-- **Email**: [your-email@example.com](mailto:dips21201@gmail.com)
-- **GitHub**: [https://github.com/your-username](https://github.com/DeepaliBhardwaj)
+- **Email**: [dips21201@gmail.com](mailto:dips21201@gmail.com)
+- **GitHub**: [https://github.com/DeepaliBhardwaj](https://github.com/DeepaliBhardwaj)
