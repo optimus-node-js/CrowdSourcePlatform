@@ -18,7 +18,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/problems/:id" element={<ProblemPage />} /> {/* Update this line */}
+          <Route path="/problems/:id" element={<ProblemPage />} />
           <Route path="/add-problem" element={<AddProblemPage />} />
         </Routes>
       </main>

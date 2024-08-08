@@ -1,38 +1,197 @@
-.App {
-  text-align: center;
+/* Header Adjustments */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #ff6a6a, #ff7a3d);
+  padding: 10px 20px;
+  font-family: 'Roboto', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header .logo {
+  font-size: 1.5em;
+  color: #fff;
+  font-weight: bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+nav {
+  display: flex;
+  align-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+nav a {
+  margin: 0 10px;
+  padding: 10px 15px;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #f1f1f1;
+}
+
+button.add-problem {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-left: 20px;
+}
+
+button.add-problem:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* Problems Section */
+.problems-section {
+  margin-top: 40px;
+  padding: 0 20px;
+}
+
+.problems-section h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Card Design */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  padding: 20px;
+  width: calc(25% - 40px);
+  transition: transform 0.3s, box-shadow 0.3s;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #61dafb;
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.card-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card-description {
+  font-family: 'Roboto', sans-serif;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.card a {
+  display: inline-block;
+  color: #fff;
+  background-color: #007BFF;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.3s;
+  align-self: center;
+}
+
+.card a:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .card {
+      width: calc(33.333% - 30px);
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 768px) {
+  .card {
+      width: calc(50% - 30px);
   }
+}
+
+@media (max-width: 480px) {
+  .card {
+      width: calc(100% - 30px);
+  }
+}
+
+/* Form Design */
+.add-problem-section {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.add-problem-section h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.add-problem-section input,
+.add-problem-section textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-family: 'Roboto', sans-serif;
+}
+
+.add-problem-section button {
+  background-color: #007BFF;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.add-problem-section button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.add-problem-section .home-button {
+  background: none;
+  color: #007BFF;
+  padding: 10px 20px;
+  border: 1px solid #007BFF;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.add-problem-section .home-button:hover {
+  background-color: #007BFF;
+  color: #fff;
 }

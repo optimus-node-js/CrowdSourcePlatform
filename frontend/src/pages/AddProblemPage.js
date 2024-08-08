@@ -1,68 +1,63 @@
 // frontend/src/pages/AddProblemPage.js
+
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProblem } from '../redux/actions/problemActions'; // Updated import
-import { Container, TextField, Button, Typography, Box, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { createProblem } from '../redux/actions/problemActions';
+import { Container, TextField, Button, Paper, Typography, Box } from '@mui/material';
 
 const AddProblemPage = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [error, setError] = useState(null);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const problemCreate = useSelector((state) => state.problemCreate);
-  const { loading, success } = problemCreate;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!title || !description) {
-      setError('Title and description are required');
-      return;
-    }
-    dispatch(createProblem({ title, description })); // Using createProblem
-    if (success) {
+    if (title && description) {
+      dispatch(createProblem({ title, description }));
       navigate('/');
     }
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box component="form" onSubmit={submitHandler} sx={{ mt: 3 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
+    <Container sx={{ mt: 4 }}>
+      <Paper elevation={3} sx={{ p: 4 }}>
+        <Typography variant="h4" gutterBottom>
           Add New Problem
         </Typography>
-        {error && <Alert severity="error">{error}</Alert>}
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="title"
-          label="Problem Title"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="description"
-          label="Description"
-          name="description"
-          multiline
-          rows={4}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <Button type="submit" fullWidth variant="contained" color="primary" disabled={loading}>
-          {loading ? 'Submitting...' : 'Submit'}
+        <Box component="form" onSubmit={submitHandler}>
+          <TextField
+            variant="outlined"
+            fullWidth
+            label="Problem Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            sx={{ mb: 2 }}
+            required
+          />
+          <TextField
+            variant="outlined"
+            fullWidth
+            multiline
+            rows={4}
+            label="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            sx={{ mb: 2 }}
+            required
+          />
+          <Button type="submit" variant="contained" color="primary" sx={{ mb: 2 }}>
+            Submit
+          </Button>
+        </Box>
+        <Button variant="outlined" color="primary" onClick={() => navigate('/')}>
+          Home
         </Button>
-      </Box>
+      </Paper>
     </Container>
   );
 };
