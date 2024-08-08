@@ -20,18 +20,41 @@ const createSolution = asyncHandler(async (req, res) => {
     res.status(201).json(solution);
 });
 
-const voteSolution = asyncHandler(async (req, res) => {
-    const solution = await Solution.findById(req.params.solutionId);
-    const vote = req.body.vote;
+// Update voteSolution function
+const voteSolution = async (req, res) => {
+    const solutionId = req.params.solutionId;
+    const userId = req.user._id;
+    const { vote } = req.body;
 
-    if (solution) {
-        solution.votes += vote;
+    try {
+        const solution = await Solution.findById(solutionId);
+
+        if (!solution) {
+            return res.status(404).json({ message: 'Solution not found' });
+        }
+
+        const existingVote = solution.voters.find(voter => voter.userId.toString() === userId.toString());
+
+        if (existingVote) {
+            if (existingVote.vote === vote) {
+                // Remove vote if the user is toggling the same vote
+                solution.voters = solution.voters.filter(voter => voter.userId.toString() !== userId.toString());
+            } else {
+                // Update the vote
+                existingVote.vote = vote;
+            }
+        } else {
+            // Add new vote
+            solution.voters.push({ userId, vote });
+        }
+
+        // Calculate the total votes
+        solution.votes = solution.voters.reduce((acc, voter) => acc + voter.vote, 0);
+
         await solution.save();
-        res.json(solution);
-    } else {
-        res.status(404);
-        throw new Error('Solution not found');
+        res.status(200).json(solution);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
-});
-
+};
 module.exports = { getSolutions, createSolution, voteSolution };

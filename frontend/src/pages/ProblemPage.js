@@ -1,4 +1,3 @@
-// frontend/src/pages/ProblemPage.js
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -40,7 +39,9 @@ const ProblemPage = () => {
   };
 
   const voteHandler = (solutionId, vote) => {
-    dispatch(voteSolution(solutionId, vote));
+    dispatch(voteSolution(solutionId, vote)).then(() => {
+      dispatch(listSolutions(id)); // Re-fetch solutions to update the UI
+    });
   };
 
   return (
@@ -85,7 +86,7 @@ const ProblemPage = () => {
                 <CardContent>
                   <Typography variant="body1">{sol.text}</Typography>
                   <Typography variant="caption" display="block" gutterBottom>
-                    Submitted by: {sol.user ? `${sol.user.firstName} ${sol.user.lastName}` : 'Anonymous'}
+                    Submitted by: {sol.user ? sol.user.firstName + ' ' + sol.user.lastName : 'Anonymous'}
                   </Typography>
                   <Typography variant="caption" display="block" gutterBottom>
                     Votes: {sol.votes}
