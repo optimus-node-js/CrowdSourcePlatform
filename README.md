@@ -9,10 +9,9 @@
 3. [Installation](#installation)
 4. [Usage](#usage)
 5. [API Endpoints](#api-endpoints)
-6. [Screenshots](#screenshots)
-7. [Contributing](#contributing)
-8. [License](#license)
-9. [Contact](#contact)
+6. [Contributing](#contributing)
+7. [License](#license)
+8. [Contact](#contact)
 
 ## Features
 
@@ -119,19 +118,6 @@ The frontend server will run on `http://localhost:3000` and the backend server w
 - **POST /api/solutions**: Create a new solution.
 - **PUT /api/solutions/:solutionId/vote**: Vote on a solution.
 
-## Screenshots
-
-### Home Page
-
-![Home Page](./screenshots/home.png)
-
-### Problem Page
-
-![Problem Page](./screenshots/problem.png)
-
-### Profile Page
-
-![Profile Page](./screenshots/profile.png)
 
 ## Contributing
 
