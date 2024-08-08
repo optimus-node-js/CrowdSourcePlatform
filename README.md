@@ -136,7 +136,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-**Project Maintainer**: Your Name
+**Project Maintainer**: Deepali Bhardwaj
 
 - **Email**: [dips21201@gmail.com](mailto:dips21201@gmail.com)
 - **GitHub**: [https://github.com/DeepaliBhardwaj](https://github.com/DeepaliBhardwaj)
