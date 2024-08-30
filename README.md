@@ -10,8 +10,7 @@
 4. [Usage](#usage)
 5. [API Endpoints](#api-endpoints)
 6. [Contributing](#contributing)
-7. [License](#license)
-8. [Contact](#contact)
+7. [Contact](#contact)
 
 ## Features
 
@@ -130,13 +129,8 @@ Contributions are welcome! Please follow these steps to contribute:
 5. Push to the branch (`git push origin feature/your-feature-name`).
 6. Open a pull request.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Contact
 
-**Project Maintainer**: Deepali Bhardwaj
+**Project Maintainer**: Rahul Vishwakarma
 
-- **Email**: [dips21201@gmail.com](mailto:dips21201@gmail.com)
-- **GitHub**: [https://github.com/DeepaliBhardwaj](https://github.com/DeepaliBhardwaj)
+- **Email**: [karmarahul67@gmail.com](mailto:karmarahul67@gmail.com)
