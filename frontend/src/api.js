@@ -25,8 +25,14 @@ export function errorMessage(err) {
   return err?.response?.data?.message || err?.message || 'Something went wrong';
 }
 
+// Serverless hosts (Vercel) cannot keep WebSocket connections, so live updates are
+// turned off there and pages simply load fresh data.
+const noopSocket = { on() {}, off() {}, emit() {} };
+const liveUpdates = !(typeof window !== 'undefined' && window.location.hostname.endsWith('vercel.app') && !API_URL);
+
 let socket;
 export function getSocket() {
+  if (!liveUpdates) return noopSocket;
   if (!socket) socket = io(API_URL || undefined, { transports: ['websocket', 'polling'], autoConnect: true });
   return socket;
 }
