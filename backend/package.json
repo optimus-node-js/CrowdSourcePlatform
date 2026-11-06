@@ -1,22 +1,26 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "crowdfix-api",
+  "version": "2.0.0",
+  "description": "CrowdFix API: report, prioritise and resolve local civic issues together",
+  "main": "server.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "node --watch server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "engines": {
+    "node": "26.x"
+  },
+  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2",
+    "express": "^4.21.2",
     "express-async-handler": "^1.2.0",
+    "express-rate-limit": "^7.5.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.5.2",
-    "socket.io": "^4.7.5"
+    "mongoose": "^8.9.0",
+    "socket.io": "^4.8.1"
   }
 }

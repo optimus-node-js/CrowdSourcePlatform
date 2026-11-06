@@ -1,138 +1,77 @@
-# Problem Solver Platform
+# CrowdFix: Community Civic Issue Tracker
 
-**Problem Solver Platform** is a collaborative web application designed to enable users to post problems and solutions, vote on solutions, and engage in discussions to solve various issues. The platform is built using the MERN stack (MongoDB, Express, React, Node.js) and incorporates Redux for state management.
+> Report local problems, rally the neighbours they affect, collect practical fixes and keep a public record until each one is actually resolved.
 
-## Table of Contents
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white) ![MUI](https://img.shields.io/badge/MUI-007FFF?style=flat-square&logo=mui&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white) ![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white) ![Socket.IO](https://img.shields.io/badge/Socket.IO-010101?style=flat-square&logo=socketdotio&logoColor=white)
 
-1. [Features](#features)
-2. [Technologies Used](#technologies-used)
-3. [Installation](#installation)
-4. [Usage](#usage)
-5. [API Endpoints](#api-endpoints)
-6. [Contributing](#contributing)
-7. [Contact](#contact)
+**Live:** [crowd-source-platform.onrender.com](https://crowd-source-platform.onrender.com) · [crowd-source-platform.vercel.app](https://crowd-source-platform.vercel.app)
+
+---
+
+## Why
+
+Broken streetlights, potholes, water cuts and overflowing bins get reported to helplines one person at a time, and then nobody knows what happened. CrowdFix turns those scattered complaints into one shared, visible queue:
+
+- **Everyone sees the same list**, ranked by how many people are affected.
+- **Fixes and contacts are crowdsourced**: helpline numbers, ticket IDs, what worked in the next ward.
+- **Every issue has a public timeline** from Reported to Resolved, so problems do not quietly disappear.
 
 ## Features
 
-- **User Authentication**: Secure user registration and login.
-- **Problem Posting**: Users can post problems that need solutions.
-- **Solution Submission**: Users can submit solutions to posted problems.
-- **Voting System**: Users can vote on solutions, enhancing collaborative problem-solving.
-- **Profile Management**: Users can view and manage their profile details.
-- **Real-time Updates**: Updates to problems and solutions are reflected in real-time without page reloads.
+| Area | What it does |
+|---|---|
+| Reporting | Title, details, category (roads, water, electricity, sanitation, safety, transport, environment, public spaces), urgency, city, area/landmark, photo link, tags |
+| Prioritisation | "This affects me too" upvotes; sort by most supported, still open or newest |
+| Fixes and updates | Anyone can post a proposed fix, progress update or helpful resource; others vote; the reporter accepts the best one |
+| Status workflow | Reported, Acknowledged, In progress, Resolved, each with an optional note, shown as a timeline |
+| City dashboard | Totals, resolution rate, average time to fix, pipeline by status, breakdown by category, most active cities |
+| Leaderboard | Civic points for reports, fixes, upvotes received and accepted fixes |
+| Real time | New issues, votes, replies and status changes stream live over Socket.IO |
+| Accounts | JWT auth, profile with home city (used as the default for new reports), moderator role |
+| Hardening | Input validation, regex-escaped search, rate-limited auth, ownership checks on every write |
 
-## Technologies Used
+## Architecture
 
-- **Frontend**: React, Redux, Material-UI
-- **Backend**: Node.js, Express
-- **Database**: MongoDB
-- **Authentication**: JWT (JSON Web Tokens)
-- **Styling**: CSS, Material-UI
+```
+frontend/  React 18 + Vite + MUI, React Router, Socket.IO client
+backend/   Express API + Socket.IO, Mongoose models (User, Issue, Solution)
+           serves frontend/build in production, so one service runs everything
+```
 
-## Installation
+| Method | Endpoint | Notes |
+|---|---|---|
+| `POST` | `/api/auth/register`, `/api/auth/login` | returns `{ user, token }` |
+| `GET` / `PATCH` | `/api/auth/me` | current profile |
+| `GET` | `/api/issues` | `q, category, status, severity, city, sort=top\|unresolved\|newest, page, limit, mine` |
+| `POST` | `/api/issues` | create (auth) |
+| `GET` / `DELETE` | `/api/issues/:id` | detail with solutions and timeline / delete (owner or moderator) |
+| `POST` | `/api/issues/:id/upvote` | toggle |
+| `PATCH` | `/api/issues/:id/status` | `{ status, note }` (owner or moderator) |
+| `POST` | `/api/issues/:id/solutions` | `{ text, kind: fix\|update\|resource }` |
+| `POST` | `/api/solutions/:id/vote` | `{ value: 1\|-1\|0 }` |
+| `POST` | `/api/solutions/:id/accept` | owner or moderator |
+| `GET` | `/api/stats`, `/api/leaderboard`, `/api/health` | public |
 
-Follow these steps to set up the project locally:
-
-### Prerequisites
-
-- Node.js
-- MongoDB
-
-### Clone the Repository
+## Run locally
 
 ```bash
 git clone https://github.com/optimus-node-js/CrowdSourcePlatform.git
-cd problem-solver-platform
+cd CrowdSourcePlatform
+cp backend/.env.example backend/.env    # set MONGO_URI and JWT_SECRET
+npm install                             # installs backend + frontend and builds the app
+npm run dev                             # API on :5000, web on :3000 with proxy
 ```
 
-### Backend Setup
+Production: `npm install && npm start` serves the API and the built app from one Node process.
 
-1. Navigate to the backend directory:
-    ```bash
-    cd backend
-    ```
+## Deploy
 
-2. Install the dependencies:
-    ```bash
-    npm install
-    ```
+- **Render (single service):** build command `yarn` or `npm install`, start command `npm start`. Set `MONGO_URI` and `JWT_SECRET` in the service environment.
+- **Vercel (frontend only):** project root `frontend/`. The app calls the Render API automatically; override with `VITE_API_URL`.
 
-3. Create a `.env` file in the backend directory and add the following environment variables:
-    ```
-    NODE_ENV=development
-    PORT=5000
-    MONGO_URI=your_mongodb_connection_string
-    JWT_SECRET=your_jwt_secret
-    ```
+## History
 
-4. Start the backend server:
-    ```bash
-    npm start
-    ```
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-    ```bash
-    cd ../frontend
-    ```
-
-2. Install the dependencies:
-    ```bash
-    npm install
-    ```
-
-3. Start the frontend development server:
-    ```bash
-    npm start
-    ```
-
-The frontend server will run on `http://localhost:3000` and the backend server will run on `http://localhost:5000`.
-
-## Usage
-
-1. **Register**: Create a new account.
-2. **Login**: Access your account.
-3. **Post a Problem**: Describe the problem you want to solve.
-4. **Submit a Solution**: Provide a solution to existing problems.
-5. **Vote on Solutions**: Upvote or downvote solutions to highlight the best ones.
-6. **View Profile**: Manage your profile information.
-
-## API Endpoints
-
-### Auth
-
-- **POST /api/auth/register**: Register a new user.
-- **POST /api/auth/login**: Login a user.
-
-### Problems
-
-- **GET /api/problems**: Get all problems.
-- **POST /api/problems**: Create a new problem.
-- **GET /api/problems/:id**: Get a problem by ID.
-
-### Solutions
-
-- **GET /api/solutions/:problemId**: Get all solutions for a problem.
-- **POST /api/solutions**: Create a new solution.
-- **PUT /api/solutions/:solutionId/vote**: Vote on a solution.
-
-## Contributing
-
-Contributions are welcome! Please follow these steps to contribute:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature-name`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add some feature'`).
-5. Push to the branch (`git push origin feature/your-feature-name`).
-6. Open a pull request.
-
-## Contact
-
-**Project Maintainer**: Rahul Vishwakarma
-
-- **Email**: [karmarahul67@gmail.com](mailto:karmarahul67@gmail.com)
+v1 (2024) was a generic "post a problem, vote on solutions" board. v2 (2026) refocuses it on civic issues with a status workflow, city dashboard, leaderboard, live updates and a single-service deployment. Existing v1 accounts and posts still load.
 
 ---
 
@@ -143,5 +82,3 @@ Contributions are welcome! Please follow these steps to contribute:
 [![Portfolio](https://img.shields.io/badge/Portfolio-rahul--vishwakarma--portfolio.vercel.app-0A66C2?style=flat-square&logo=vercel&logoColor=white)](https://rahul-vishwakarma-portfolio.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Rahul%20Vishwakarma-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/rahul-vishwakarma-101346192)
 [![Email](https://img.shields.io/badge/Email-karmarahul67%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:karmarahul67@gmail.com)
-[![GitHub](https://img.shields.io/badge/GitHub-optimus--node--js-181717?style=flat-square&logo=github)](https://github.com/optimus-node-js)
-
