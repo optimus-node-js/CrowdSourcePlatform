@@ -117,7 +117,6 @@ The frontend server will run on `http://localhost:3000` and the backend server w
 - **POST /api/solutions**: Create a new solution.
 - **PUT /api/solutions/:solutionId/vote**: Vote on a solution.
 
-
 ## Contributing
 
 Contributions are welcome! Please follow these steps to contribute:
@@ -137,13 +136,12 @@ Contributions are welcome! Please follow these steps to contribute:
 
 ---
 
-## 👤 Author
+## Author
 
-**Rahul Vishwakarma** — Senior Full Stack Developer · Ahmedabad, India
+**Rahul Vishwakarma**, Senior Full Stack Developer based in Ahmedabad, India
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-rahul--vishwakarma--portfolio.vercel.app-0A66C2?style=flat-square&logo=vercel&logoColor=white)](https://rahul-vishwakarma-portfolio.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Rahul%20Vishwakarma-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/rahul-vishwakarma-101346192)
 [![Email](https://img.shields.io/badge/Email-karmarahul67%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:karmarahul67@gmail.com)
 [![GitHub](https://img.shields.io/badge/GitHub-optimus--node--js-181717?style=flat-square&logo=github)](https://github.com/optimus-node-js)
 
-If you find this project useful, consider giving it a ⭐.
