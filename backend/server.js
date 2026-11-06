@@ -18,6 +18,8 @@ app.set('trust proxy', 1);
 app.use(cors({ origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : true }));
 app.use(express.json({ limit: '100kb' }));
 
+app.get('/api/health', (req, res) => res.json({ ok: true, service: 'crowdfix-api' }));
+
 // Make sure the database is connected before any API call (needed for serverless hosts too).
 app.use('/api', async (req, res, next) => {
   try {
@@ -33,7 +35,6 @@ app.use(
   rateLimit({ windowMs: 15 * 60 * 1000, limit: 50, standardHeaders: true, legacyHeaders: false })
 );
 
-app.get('/api/health', (req, res) => res.json({ ok: true, service: 'crowdfix-api' }));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/issues', require('./routes/issues'));
 app.use('/api/solutions', require('./routes/solutions'));

@@ -4,7 +4,7 @@
 
 ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white) ![MUI](https://img.shields.io/badge/MUI-007FFF?style=flat-square&logo=mui&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white) ![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white) ![Socket.IO](https://img.shields.io/badge/Socket.IO-010101?style=flat-square&logo=socketdotio&logoColor=white)
 
-**Live:** [crowd-source-platform.onrender.com](https://crowd-source-platform.onrender.com) · [crowd-source-platform.vercel.app](https://crowd-source-platform.vercel.app)
+**Live:** [crowd-source-platform-backend.vercel.app](https://crowd-source-platform-backend.vercel.app) · [crowd-source-platform.onrender.com](https://crowd-source-platform.onrender.com)
 
 ---
 
@@ -67,7 +67,7 @@ Production: `npm install && npm start` serves the API and the built app from one
 ## Deploy
 
 - **Render (single service):** build command `yarn` or `npm install`, start command `npm start`. Set `MONGO_URI` and `JWT_SECRET` in the service environment.
-- **Vercel (frontend only):** project root `frontend/`. The app calls the Render API automatically; override with `VITE_API_URL`.
+- **Vercel (full stack):** deploy from the repo root. `vercel.json` serves `frontend/build` and runs the API as a serverless function (`api/index.js`). Set `MONGO_URI` and `JWT_SECRET`. Live updates need the Render deploy, since serverless functions cannot hold WebSocket connections.
 
 ## History
 

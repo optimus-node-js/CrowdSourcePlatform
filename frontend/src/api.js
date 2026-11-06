@@ -1,12 +1,10 @@
 import axios from 'axios';
 import { io } from 'socket.io-client';
 
-// Same-origin by default (Render serves API + app together). The Vercel-hosted frontend
-// talks to the Render API unless VITE_API_URL says otherwise.
-const FALLBACK_API = 'https://crowd-source-platform.onrender.com';
+// Same-origin by default: Render and Vercel both serve the API next to the app.
 export const API_URL =
   import.meta.env.VITE_API_URL ||
-  (typeof window !== 'undefined' && window.location.hostname.endsWith('vercel.app') ? FALLBACK_API : '');
+  '';
 
 const TOKEN_KEY = 'crowdfix.token';
 
