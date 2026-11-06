@@ -4,7 +4,7 @@
 
 ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white) ![MUI](https://img.shields.io/badge/MUI-007FFF?style=flat-square&logo=mui&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white) ![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white) ![Socket.IO](https://img.shields.io/badge/Socket.IO-010101?style=flat-square&logo=socketdotio&logoColor=white)
 
-**Live:** [crowd-source-platform-backend.vercel.app](https://crowd-source-platform-backend.vercel.app) · [crowd-source-platform.onrender.com](https://crowd-source-platform.onrender.com)
+**Live:** [crowd-source-platform.onrender.com](https://crowd-source-platform.onrender.com) (free tier, the first load after idle takes about a minute)
 
 ---
 
