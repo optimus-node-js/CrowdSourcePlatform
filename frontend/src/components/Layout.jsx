@@ -35,7 +35,7 @@ function Brand() {
     <Stack component={RouterLink} to="/" direction="row" alignItems="center" spacing={1} sx={{ textDecoration: 'none', color: 'inherit' }}>
       <Box component="img" src="/favicon.svg" alt="" sx={{ width: 30, height: 30 }} />
       <Typography variant="h6" sx={{ fontWeight: 800, letterSpacing: '-0.02em' }}>
-        CrowdFix
+        StillBroken
       </Typography>
     </Stack>
   );
@@ -127,7 +127,7 @@ export default function Layout({ children }) {
         <Container maxWidth="lg">
           <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" spacing={1}>
             <Typography variant="body2" color="text.secondary">
-              CrowdFix helps neighbours report, prioritise and resolve local problems together.
+              StillBroken keeps every reported problem public until it is fixed.
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Built by{' '}
@@ -135,7 +135,7 @@ export default function Layout({ children }) {
                 Rahul Vishwakarma
               </Link>{' '}
               ·{' '}
-              <Link href="https://github.com/optimus-node-js/CrowdSourcePlatform" target="_blank" rel="noreferrer">
+              <Link href="https://github.com/optimus-node-js/StillBroken" target="_blank" rel="noreferrer">
                 Source
               </Link>
             </Typography>

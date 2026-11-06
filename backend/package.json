@@ -1,7 +1,7 @@
 {
-  "name": "crowdfix-api",
+  "name": "stillbroken-api",
   "version": "2.0.0",
-  "description": "CrowdFix API: report, prioritise and resolve local civic issues together",
+  "description": "StillBroken API: every reported civic problem stays public until it is fixed",
   "main": "server.js",
   "private": true,
   "scripts": {

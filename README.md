@@ -1,20 +1,25 @@
-# CrowdFix: Community Civic Issue Tracker
+# StillBroken
 
-> Report local problems, rally the neighbours they affect, collect practical fixes and keep a public record until each one is actually resolved.
+> Every reported problem stays public until it is fixed.
 
-![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white) ![MUI](https://img.shields.io/badge/MUI-007FFF?style=flat-square&logo=mui&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white) ![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white) ![Socket.IO](https://img.shields.io/badge/Socket.IO-010101?style=flat-square&logo=socketdotio&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white) ![MUI](https://img.shields.io/badge/MUI-007FFF?style=flat-square&logo=mui&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white) ![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
 
-**Live:** [crowd-source-platform-backend.vercel.app](https://crowd-source-platform-backend.vercel.app)
+**Live:** [stillbroken.vercel.app](https://stillbroken.vercel.app)
 
 ---
 
-## Why
+## The problem
 
-Broken streetlights, potholes, water cuts and overflowing bins get reported to helplines one person at a time, and then nobody knows what happened. CrowdFix turns those scattered complaints into one shared, visible queue:
+A streetlight goes dark. Ten people notice. A few call the helpline, each gets a different ticket number, and then nothing: no status, no timeline, no way to know whether anyone is working on it or whether the complaint was simply closed. Problems do not get ignored because nobody reported them. They get ignored because the reports disappear.
 
-- **Everyone sees the same list**, ranked by how many people are affected.
-- **Fixes and contacts are crowdsourced**: helpline numbers, ticket IDs, what worked in the next ward.
-- **Every issue has a public timeline** from Reported to Resolved, so problems do not quietly disappear.
+## What StillBroken does
+
+StillBroken is a public, shared record for local problems that does not let them disappear:
+
+- **One report, many voices.** Neighbours add "this affects me too" instead of filing duplicate complaints, so the real scale of each problem is visible.
+- **A status everyone can see.** Reported, Acknowledged, In progress, Resolved, each change with a note and a date on a public timeline.
+- **Shared know-how.** People post helpline numbers, ticket IDs, contacts and what worked in the next ward; the most useful answer gets accepted.
+- **Pressure through visibility.** A city dashboard shows what is still open, how long fixes take and which categories and cities are lagging.
 
 ## Features
 
@@ -55,8 +60,8 @@ backend/   Express API + Socket.IO, Mongoose models (User, Issue, Solution)
 ## Run locally
 
 ```bash
-git clone https://github.com/optimus-node-js/CrowdSourcePlatform.git
-cd CrowdSourcePlatform
+git clone https://github.com/optimus-node-js/StillBroken.git
+cd StillBroken
 cp backend/.env.example backend/.env    # set MONGO_URI and JWT_SECRET
 npm install                             # installs backend + frontend and builds the app
 npm run dev                             # API on :5000, web on :3000 with proxy
@@ -71,7 +76,8 @@ Production: `npm install && npm start` serves the API and the built app from one
 
 ## History
 
-v1 (2024) was a generic "post a problem, vote on solutions" board. v2 (2026) refocuses it on civic issues with a status workflow, city dashboard, leaderboard, live updates and a single-service deployment. Existing v1 accounts and posts still load.
+- **2024:** started as a generic "post a problem, vote on solutions" board (CrowdSourcePlatform).
+- **2026:** rebuilt and renamed **StillBroken** around one goal, public accountability for local problems: status workflow and timeline, city dashboard, leaderboard, Vite frontend and a single-project Vercel deployment. Existing v1 accounts and posts still load.
 
 ---
 

@@ -60,14 +60,14 @@ export default function Home() {
           <Grid container spacing={6} alignItems="center">
             <Grid item xs={12} md={7}>
               <Typography variant="overline" sx={{ opacity: 0.8, letterSpacing: '0.12em' }}>
-                Community-powered civic issue tracker
+                Public accountability for local problems
               </Typography>
               <Typography variant="h2" sx={{ fontSize: { xs: 36, md: 52 }, mt: 1 }}>
-                Fix your neighbourhood, together.
+                Is it still broken?
               </Typography>
               <Typography sx={{ mt: 2, fontSize: 18, opacity: 0.9, maxWidth: 560 }}>
-                Report potholes, water cuts, dark streets and garbage dumps. Rally the people affected, collect practical fixes and keep
-                a public record until the problem is actually solved.
+                Complaints to helplines disappear. Here, every pothole, water cut, dark street and garbage dump you report stays public,
+                with a status, a timeline and the neighbours it affects, until someone actually fixes it.
               </Typography>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
                 <Button component={RouterLink} to="/report" size="large" variant="contained" color="secondary" startIcon={<AddLocationAltIcon />}>
@@ -102,7 +102,7 @@ export default function Home() {
 
       <Container maxWidth="lg" sx={{ py: 8 }}>
         <Typography variant="h4" gutterBottom>
-          How CrowdFix works
+          How StillBroken works
         </Typography>
         <Grid container spacing={3} sx={{ mt: 1 }}>
           {STEPS.map(({ icon: Icon, title, body }, i) => (

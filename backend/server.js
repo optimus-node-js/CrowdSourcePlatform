@@ -18,7 +18,7 @@ app.set('trust proxy', 1);
 app.use(cors({ origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : true }));
 app.use(express.json({ limit: '100kb' }));
 
-app.get('/api/health', (req, res) => res.json({ ok: true, service: 'crowdfix-api' }));
+app.get('/api/health', (req, res) => res.json({ ok: true, service: 'stillbroken-api' }));
 
 // Make sure the database is connected before any API call (needed for serverless hosts too).
 app.use('/api', async (req, res, next) => {
@@ -46,7 +46,7 @@ if (fs.existsSync(path.join(clientBuild, 'index.html'))) {
   app.use(express.static(clientBuild, { maxAge: '1h', index: false }));
   app.get(/^\/(?!api\/).*/, (req, res) => res.sendFile(path.join(clientBuild, 'index.html')));
 } else {
-  app.get('/', (req, res) => res.json({ message: 'CrowdFix API is running' }));
+  app.get('/', (req, res) => res.json({ message: 'StillBroken API is running' }));
 }
 
 app.use('/api', notFound);
@@ -59,7 +59,7 @@ if (require.main === module) {
 
   const PORT = process.env.PORT || 5000;
   connectDB()
-    .then(() => server.listen(PORT, () => console.log(`CrowdFix API listening on ${PORT}`)))
+    .then(() => server.listen(PORT, () => console.log(`StillBroken API listening on ${PORT}`)))
     .catch((err) => {
       console.error('Failed to connect to MongoDB:', err.message);
       process.exit(1);
