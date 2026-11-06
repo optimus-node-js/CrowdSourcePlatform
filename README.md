@@ -4,7 +4,7 @@
 
 ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white) ![MUI](https://img.shields.io/badge/MUI-007FFF?style=flat-square&logo=mui&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white) ![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white) ![Socket.IO](https://img.shields.io/badge/Socket.IO-010101?style=flat-square&logo=socketdotio&logoColor=white)
 
-**Live:** [crowd-source-platform.onrender.com](https://crowd-source-platform.onrender.com) (free tier, the first load after idle takes about a minute)
+**Live:** [crowd-source-platform-backend.vercel.app](https://crowd-source-platform-backend.vercel.app)
 
 ---
 
@@ -26,7 +26,7 @@ Broken streetlights, potholes, water cuts and overflowing bins get reported to h
 | Status workflow | Reported, Acknowledged, In progress, Resolved, each with an optional note, shown as a timeline |
 | City dashboard | Totals, resolution rate, average time to fix, pipeline by status, breakdown by category, most active cities |
 | Leaderboard | Civic points for reports, fixes, upvotes received and accepted fixes |
-| Real time | New issues, votes, replies and status changes stream live over Socket.IO |
+| Real time | When run as a long-lived Node server, new issues, votes, replies and status changes stream live over Socket.IO (disabled on Vercel's serverless runtime) |
 | Accounts | JWT auth, profile with home city (used as the default for new reports), moderator role |
 | Hardening | Input validation, regex-escaped search, rate-limited auth, ownership checks on every write |
 
@@ -66,8 +66,8 @@ Production: `npm install && npm start` serves the API and the built app from one
 
 ## Deploy
 
-- **Render (single service):** build command `yarn` or `npm install`, start command `npm start`. Set `MONGO_URI` and `JWT_SECRET` in the service environment.
-- **Vercel (full stack):** deploy from the repo root. `vercel.json` serves `frontend/build` and runs the API as a serverless function (`api/index.js`). Set `MONGO_URI` and `JWT_SECRET`. Live updates need the Render deploy, since serverless functions cannot hold WebSocket connections.
+- **Vercel (production):** one project from the repo root. `vercel.json` serves `frontend/build` and runs the Express API as a serverless function (`api/index.js`). Set `MONGO_URI` and `JWT_SECRET`.
+- **Any Node host (optional):** `npm install && npm start` runs the API and the built app from one process, with Socket.IO live updates enabled.
 
 ## History
 
